@@ -5,17 +5,17 @@ import { useState, useEffect } from "react";
 export default function ChatPage() {
   const router = useRouter();
   const params = useParams();
-  const [chatType, setChatType] = useState<'user' | 'group'>('user');
+  const [chatType, setChatType] = useState<"user" | "group">("user");
   const [messages, setMessages] = useState<string[]>([]);
 
   useEffect(() => {
     // Determine chat type from ID prefix
     const id = params.id as string;
-    if (id.startsWith('g-')) {
-      setChatType('group');
+    if (id.startsWith("g-")) {
+      setChatType("group");
       setMessages(["Welcome to the group!", "Hello everyone!"]);
     } else {
-      setChatType('user');
+      setChatType("user");
       setMessages(["Hi there!", "How's your day?"]);
     }
   }, [params.id]);
@@ -31,23 +31,25 @@ export default function ChatPage() {
   }
 
   return (
-    <><section className="glass mx-2 lg:mx-4 rounded-2xl p-4 lg:p-6 space-y-4">
-          <div className="flex items-center gap-4">
-              <button
-                  onClick={() => router.back()}
-                  className="text-white hover:bg-white/20 p-2 rounded-lg transition-all"
-              ></button>
-              ←
-          </button>
-          <h2 className="text-xl lg:text-2xl font-bold text-white">
-              {chatType === 'group' ? 'Group Chat' : 'Private Chat'}
-          </h2>
-      </div><div className="space-y-4 max-h-[70vh] lg:max-h-[60vh] overflow-y-auto p-2 lg:p-4"></div></>
+    <section className="glass mx-2 lg:mx-4 rounded-2xl p-4 lg:p-6 space-y-4">
+      <div className="flex items-center gap-4">
+        <button
+          onClick={() => router.back()}
+          className="text-white hover:bg-white/20 p-2 rounded-lg transition-all"
+        >
+          ←
+        </button>
+        <h2 className="text-xl lg:text-2xl font-bold text-white">
+          {chatType === "group" ? "Group Chat" : "Private Chat"}
+        </h2>
+      </div>
+
+      <div className="space-y-4 max-h-[70vh] lg:max-h-[60vh] overflow-y-auto p-2 lg:p-4">
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            className={`message-bubble ${idx % 2 === 0 ? 'sent' : 'received'}`}
-          ></div>
+            className={`message-bubble ${idx % 2 === 0 ? "sent" : "received"}`}
+          >
             {msg}
           </div>
         ))}
@@ -67,7 +69,7 @@ export default function ChatPage() {
           type="submit"
           className="hover-3d glow px-4 py-3 lg:px-6 lg:py-4 rounded-full 
             bg-blue-500 text-white font-medium w-full lg:w-auto"
-        ></button>
+        >
           Send
         </button>
       </form>
