@@ -16,13 +16,14 @@ export default function SideBar({ onClose }: { onClose?: () => void }) {
       <ul className="space-y-4">
         {[
           { href: "/", label: "🏠 Home" },
-          { href: "/chat/user123", label: "👤 User Chat" },
-          { href: "/chat/group123", label: "👥 Group Chat" },
+          { href: "/chat/u-alice", label: "👤 Chat with Alice" },
+          { href: "/chat/g-general", label: "👥 General Group" },
         ].map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
               className="hover-3d block p-3 rounded-lg bg-white/10 hover:bg-white/20 transition-all"
+              onClick={onClose}
             >
               {link.label}
             </Link>
