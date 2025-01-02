@@ -8,6 +8,13 @@ export default function ChatPage() {
   const [chatType, setChatType] = useState<"user" | "group">("user");
   const [messages, setMessages] = useState<string[]>([]);
 
+  async function fetchMessages() {
+    const res = await fetch("/api/messages", { cache: "no-store" });
+    const data = await res.json();
+    // ...optionally filter messages by user or group...
+    setMessages(data.map((m: any) => m.content));
+  }
+
   useEffect(() => {
     // Determine chat type from ID prefix
     const id = params.id as string;
@@ -18,14 +25,20 @@ export default function ChatPage() {
       setChatType("user");
       setMessages(["Hi there!", "How's your day?"]);
     }
+    fetchMessages();
   }, [params.id]);
 
   const [newMsg, setNewMsg] = useState("");
 
-  function handleSend(e: React.FormEvent) {
+  async function handleSend(e: React.FormEvent) {
     e.preventDefault();
     if (newMsg) {
-      setMessages([...messages, newMsg]);
+      await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: params.id, content: newMsg }),
+      });
+      fetchMessages();
       setNewMsg("");
     }
   }
