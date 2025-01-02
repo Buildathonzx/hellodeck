@@ -27,13 +27,10 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased
-          bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen flex`}
+          bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 min-h-screen flex p-4`}
       >
         <SideBar />
-        <div className="flex-1">
-          <header className="animate-pulse mb-4 p-4 text-white font-bold">
-            <h2>Hellodeck</h2>
-          </header>
+        <div className="flex-1 ml-4">
           {children}
         </div>
       </body>

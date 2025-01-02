@@ -54,3 +54,45 @@ button {
 .animate-pulse {
   animation: pulse 2s infinite;
 }
+
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.message-bubble {
+  @apply p-3 rounded-2xl max-w-[80%] shadow-lg transition-all duration-300;
+}
+
+.message-bubble.sent {
+  @apply bg-blue-500 text-white ml-auto rounded-tr-none;
+  transform: perspective(1000px) rotateX(0deg);
+}
+
+.message-bubble.received {
+  @apply bg-white text-gray-800 rounded-tl-none;
+  transform: perspective(1000px) rotateX(0deg);
+}
+
+.hover-3d {
+  transition: transform 0.3s ease;
+}
+
+.hover-3d:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.glow {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}

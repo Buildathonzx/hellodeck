@@ -15,24 +15,29 @@ export default function Home() {
   }
 
   return (
-    <main className="bg-white rounded-lg p-4 shadow-lg transition-all">
-      <h1>Hellodeck</h1>
-      <ul className="space-y-2 mt-2">
+    <main className="glass mx-4 rounded-2xl p-6 space-y-4">
+      <h1 className="text-2xl font-bold text-white animate-float">Messages</h1>
+      <div className="space-y-4 max-h-[60vh] overflow-y-auto p-4">
         {messages.map((msg, idx) => (
-          <li key={idx}>{msg}</li>
+          <div
+            key={idx}
+            className={`message-bubble ${idx % 2 === 0 ? 'sent' : 'received'}`}
+          >
+            {msg}
+          </div>
         ))}
-      </ul>
-      <form className="mt-4" onSubmit={handleSend}>
+      </div>
+      <form onSubmit={handleSend} className="mt-4 flex gap-2">
         <input
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Type message..."
-          className="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:border-blue-500 transition"
+          placeholder="Type a message..."
+          className="flex-1 p-4 rounded-full bg-white/10 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white rounded px-4 py-1 hover:bg-blue-700 transition-transform transform hover:scale-105"
+          className="hover-3d glow px-6 py-4 rounded-full bg-blue-500 text-white font-medium"
         >
           Send
         </button>
