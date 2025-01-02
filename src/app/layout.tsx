@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Hellodeck",
-  description: "End to end enrypted web messaging and communication application powered by Cairo/Calimero SDK",
+  description: "End to end enrypted messaging and communication application powered by Cairo/Calimero SDK",
 };
 
 export default function RootLayout({
