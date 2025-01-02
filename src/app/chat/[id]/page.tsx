@@ -31,20 +31,18 @@ export default function ChatPage() {
   }
 
   return (
-    <section className="glass mx-2 lg:mx-4 rounded-2xl p-4 lg:p-6 space-y-4">
-      <div className="flex items-center gap-4">
-        <button 
-          onClick={() => router.back()} 
-          className="text-white hover:bg-white/20 p-2 rounded-lg transition-all"
-        ></button>
-          ←
-        </button>
-        <h2 className="text-xl lg:text-2xl font-bold text-white">
-          {chatType === 'group' ? 'Group Chat' : 'Private Chat'}
-        </h2>
-      </div>
-
-      <div className="space-y-4 max-h-[70vh] lg:max-h-[60vh] overflow-y-auto p-2 lg:p-4"></div>
+    <><section className="glass mx-2 lg:mx-4 rounded-2xl p-4 lg:p-6 space-y-4">
+          <div className="flex items-center gap-4">
+              <button
+                  onClick={() => router.back()}
+                  className="text-white hover:bg-white/20 p-2 rounded-lg transition-all"
+              ></button>
+              ←
+          </button>
+          <h2 className="text-xl lg:text-2xl font-bold text-white">
+              {chatType === 'group' ? 'Group Chat' : 'Private Chat'}
+          </h2>
+      </div><div className="space-y-4 max-h-[70vh] lg:max-h-[60vh] overflow-y-auto p-2 lg:p-4"></div></>
         {messages.map((msg, idx) => (
           <div
             key={idx}
