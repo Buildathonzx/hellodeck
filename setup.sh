@@ -28,4 +28,8 @@ merod --version
 echo "Initializing node..."
 merod --node-name hellodecknode init --server-port 2428 --swarm-port 2528 --protocol starknet
 
+# Run the node
+echo "Starting the node..."
+merod --node-name hellodecknode run
+
 echo "Setup completed successfully!"
