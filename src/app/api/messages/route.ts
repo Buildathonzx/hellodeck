@@ -1,6 +1,6 @@
-
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../lib/prisma";
+import { encryptMessage, decryptMessage } from "../../../lib/encryption";
 
 export async function GET() {
   const messages = await prisma.message.findMany({
@@ -8,7 +8,12 @@ export async function GET() {
     orderBy: { createdAt: "desc" },
     take: 20,
   });
-  return NextResponse.json(messages);
+  // Decrypt
+  const decrypted = messages.map((m) => ({
+    ...m,
+    content: decryptMessage(m.content),
+  }));
+  return NextResponse.json(decrypted);
 }
 
 export async function POST(request: NextRequest) {
@@ -24,7 +29,7 @@ export async function POST(request: NextRequest) {
 
   const newMessage = await prisma.message.create({
     data: {
-      content,
+      content: encryptMessage(content),
       userId,
     },
   });

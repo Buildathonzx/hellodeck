@@ -1,4 +1,3 @@
-
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -11,6 +10,7 @@ export default function SignInPage() {
   async function handleSignIn(e: React.FormEvent) {
     e.preventDefault();
     // ...call POST /api/auth/signin with credentials...
+    document.cookie = "loggedIn=true; path=/;"; // simplistic example
     router.push("/");
   }
 

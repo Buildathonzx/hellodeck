@@ -7,6 +7,7 @@ export default function SideBar({ onClose }: { onClose?: () => void }) {
 
   function handleLogout() {
     // ...logout logic...
+    document.cookie = "loggedIn=false; path=/;"
     setLoggedIn(false);
     onClose?.();
   }

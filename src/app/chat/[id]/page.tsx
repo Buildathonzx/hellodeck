@@ -16,15 +16,6 @@ export default function ChatPage() {
   }
 
   useEffect(() => {
-    // Determine chat type from ID prefix
-    const id = params.id as string;
-    if (id.startsWith("g-")) {
-      setChatType("group");
-      setMessages(["Welcome to the group!", "Hello everyone!"]);
-    } else {
-      setChatType("user");
-      setMessages(["Hi there!", "How's your day?"]);
-    }
     fetchMessages();
   }, [params.id]);
 
