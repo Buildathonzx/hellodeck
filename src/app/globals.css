@@ -96,3 +96,15 @@ button {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+.bottom-nav-item {
+  @apply flex flex-col items-center p-2 rounded-lg transition-all;
+}
+
+.bottom-nav-item:active {
+  transform: scale(0.95);
+}
+
+.page-container {
+  @apply max-w-4xl mx-auto p-4 space-y-8 pb-20 lg:pb-8;
+}
