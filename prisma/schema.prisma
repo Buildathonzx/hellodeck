@@ -23,3 +23,10 @@ model Message {
   userId    String
   user      User     @relation(fields: [userId], references: [id])
 }
+
+model Server {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  // Optionally add fields like description, etc.
+}
