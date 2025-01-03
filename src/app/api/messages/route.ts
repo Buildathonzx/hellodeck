@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../lib/prisma";
 import { encryptMessage, decryptMessage } from "../../../lib/encryption";
+import { calimero } from "../../../lib/calimero";
 
 export async function GET() {
   const messages = await prisma.message.findMany({
@@ -9,10 +10,12 @@ export async function GET() {
     take: 20,
   });
   // Decrypt
-  const decrypted = messages.map((m) => ({
-    ...m,
-    content: decryptMessage(m.content),
-  }));
+  const decrypted = await Promise.all(
+    messages.map(async (m) => ({
+      ...m,
+      content: await calimero.decryptMessage(m.content)
+    }))
+  );
   return NextResponse.json(decrypted);
 }
 
@@ -27,9 +30,10 @@ export async function POST(request: NextRequest) {
     });
   }
 
+  const encrypted = await calimero.encryptMessage(content);
   const newMessage = await prisma.message.create({
     data: {
-      content: encryptMessage(content),
+      content: encrypted,
       userId,
     },
   });
