@@ -1,14 +1,15 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
 
 export default function SideBar({ onClose }: { onClose?: () => void }) {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { data: session } = useSession();
+  const [dummy, setDummy] = useState(false); // can help force UI refresh if needed
+  const loggedIn = !!session?.user;
 
   function handleLogout() {
-    // ...logout logic...
-    document.cookie = "loggedIn=false; path=/;"
-    setLoggedIn(false);
+    signOut();
     onClose?.();
   }
 
