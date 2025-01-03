@@ -1,4 +1,8 @@
-import { Provider, Account, Contract, RpcProvider } from "starknet";
+import { Provider, Account, RpcProvider } from "starknet";
+
+if (!process.env.NEXT_PUBLIC_STARKNET_NODE_URL) {
+  throw new Error("NEXT_PUBLIC_STARKNET_NODE_URL must be set in environment variables");
+}
 
 class StarknetClient {
   private static instance: StarknetClient;
@@ -7,7 +11,7 @@ class StarknetClient {
 
   private constructor() {
     // Initialize with devnet for development
-    this.provider = new RpcProvider({ nodeUrl: process.env.NEXT_PUBLIC_STARKNET_NODE_URL || "http://127.0.0.1:5050/rpc" });
+    this.provider = new RpcProvider({ nodeUrl: process.env.NEXT_PUBLIC_STARKNET_NODE_URL });
   }
 
   static getInstance(): StarknetClient {
@@ -17,16 +21,22 @@ class StarknetClient {
     return StarknetClient.instance;
   }
 
-  async connectAccount(accountAddress: string, privateKey: string) {
-    this.account = new Account(this.provider, accountAddress, privateKey);
-    return this.account;
+  async connectAccount(accountAddress: string, privateKey: string): Promise<Account> {
+    try {
+      this.account = new Account(this.provider, accountAddress, privateKey);
+      await this.account.declareAndDeploy({});
+      return this.account;
+    } catch (error) {
+      console.error("Failed to connect Starknet account:", error);
+      throw error;
+    }
   }
 
-  async getProvider() {
+  getProvider(): Provider {
     return this.provider;
   }
 
-  async getCurrentAccount() {
+  getCurrentAccount(): Account | null {
     return this.account;
   }
 }
