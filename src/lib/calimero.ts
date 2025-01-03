@@ -1,4 +1,4 @@
-import { CalimeroSdk, WalletConnection, CalimeroToken, CalimeroTokenData } from "calimero-sdk";
+import { CalimeroSdk, WalletConnection } from "calimero-sdk";
 
 const config = {
   shardId: process.env.NEXT_PUBLIC_CALIMERO_SHARD_ID,
@@ -9,8 +9,8 @@ const config = {
 
 class CalimeroClient {
   private static instance: CalimeroClient;
-  private sdk: CalimeroSdk = new CalimeroSdk;
-  private walletConnection: WalletConnection = new WalletConnection;
+  private sdk: CalimeroSdk;
+  private walletConnection: WalletConnection;
 
   private constructor() {
     this.initialize();
